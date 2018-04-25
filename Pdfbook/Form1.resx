@@ -138,6 +138,15 @@
         AAAAAQAAAAAAAAAAAAAAAAwAAAAADAAA2BMAANgTAAAL
 </value>
   </data>
+  <data name="button2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAACkSURBVDhPY6jonvOfFMyADkCCxAK8BizM8sKLQQDmChSDkA34fwTIxoKRDXj4+hMJBrx5gNMA
+        GEYx4M+B6f9fLiz//3P3pP+fd0wEY1wGHL1yD9OAJ7Py/j+YnP7/0bTs/wea4/+vLQsFG0K0ASDNMPxw
+        Wtb/rVXhYEOINgAfBgG8BhADaGcAKRjDABiASRKDcRpACsYwAAZgksRgnAYQj+f8BwBGMMhjlR5agQAA
+        AABJRU5ErkJggg==
+</value>
+  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAIAEBAAAAEAIABoBAAAJgAAACAgAAABACAAqBAAAI4EAAAoAAAAEAAAACAAAAABACAAAAAAADAE

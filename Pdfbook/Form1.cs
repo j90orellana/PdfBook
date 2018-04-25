@@ -32,6 +32,7 @@ namespace Pdfbook
                 dtgconten.DataSource = tablita;
                 Analizarpdf();
             }
+            dtgconten.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
         public void Analizarpdf()
         {
@@ -67,6 +68,16 @@ namespace Pdfbook
         private void dtgconten_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             axAcroPDF1.src = (dtgconten["RutaArchivo", e.RowIndex].Value.ToString());
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            dtgconten.SelectAll();
+            Clipboard.SetDataObject(dtgconten.GetClipboardContent());
+        }
+
+        private void dtgconten_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Clipboard.SetDataObject(dtgconten.GetClipboardContent());
         }
     }
 }

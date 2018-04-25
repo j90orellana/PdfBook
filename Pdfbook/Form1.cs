@@ -21,7 +21,7 @@ namespace Pdfbook
         {
             openFileDialog1.Filter = "Archivos PdFS|*.pdf";
             openFileDialog1.Multiselect = true;
-            dtgconten.DataSource = null;
+            tablita.Rows.Clear();
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 foreach (string item in openFileDialog1.FileNames)
@@ -31,7 +31,6 @@ namespace Pdfbook
                 }
                 dtgconten.DataSource = tablita;
                 Analizarpdf();
-                
             }
         }
         public void Analizarpdf()
@@ -48,7 +47,11 @@ namespace Pdfbook
                     iTextSharp.text.pdf.PdfReader PdfRreader = new iTextSharp.text.pdf.PdfReader(name);
 
                     item.Cells["paginas"].Value = PdfRreader.NumberOfPages;
-                    f += PdfRreader.NumberOfPages;                   
+
+
+
+                    item.Cells["archivo"].Value = name.Substring(name.LastIndexOf('\\') + 1);
+                    f += PdfRreader.NumberOfPages;
                 }
             }
             lbl.Text = $"Nro Registros {dtgconten.Rows.Count} Nro Páginas {f}";

@@ -32,7 +32,7 @@ namespace Pdfbook
                 dtgconten.DataSource = tablita;
                 Analizarpdf();
             }
-            dtgconten.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dtgconten.Columns["ruta"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
         public void Analizarpdf()
         {
@@ -49,18 +49,20 @@ namespace Pdfbook
 
                     item.Cells["paginas"].Value = PdfRreader.NumberOfPages;
 
-
+                    item.Cells["Ruta"].Value= name.Substring(0,name.LastIndexOf('\\') );
 
                     item.Cells["archivo"].Value = name.Substring(name.LastIndexOf('\\') + 1);
                     f += PdfRreader.NumberOfPages;
                 }
             }
             lbl.Text = $"Nro Registros {dtgconten.Rows.Count} Nro Páginas {f}";
+            dtgconten.Columns["rutaarchivo"].Visible = false;
         }
         private void Form1_Load(object sender, EventArgs e)
         {
             tablita = new DataTable();
             tablita.Columns.Add("RutaArchivo", typeof(string));
+            tablita.Columns.Add("Ruta", typeof(string));
             tablita.Columns.Add("Archivo", typeof(string));
             tablita.Columns.Add("Paginas", typeof(int));
         }
@@ -78,6 +80,11 @@ namespace Pdfbook
         private void dtgconten_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             Clipboard.SetDataObject(dtgconten.GetClipboardContent());
+        }
+
+        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

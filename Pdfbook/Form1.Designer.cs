@@ -36,8 +36,8 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.axAcroPDF1 = new AxAcroPDFLib.AxAcroPDF();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.lbl = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.lbl = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dtgconten)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axAcroPDF1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -60,7 +60,7 @@
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button1.Location = new System.Drawing.Point(377, 7);
+            this.button1.Location = new System.Drawing.Point(364, 7);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(109, 23);
             this.button1.TabIndex = 1;
@@ -73,8 +73,12 @@
             // 
             this.dtgconten.AllowUserToAddRows = false;
             this.dtgconten.AllowUserToDeleteRows = false;
+            this.dtgconten.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.dtgconten.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dtgconten.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dtgconten.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dtgconten.BackgroundColor = System.Drawing.Color.White;
             this.dtgconten.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
@@ -87,7 +91,7 @@
             this.dtgconten.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dtgconten.RowTemplate.Height = 18;
             this.dtgconten.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dtgconten.Size = new System.Drawing.Size(580, 536);
+            this.dtgconten.Size = new System.Drawing.Size(494, 503);
             this.dtgconten.TabIndex = 2;
             this.dtgconten.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgconten_CellDoubleClick);
             this.dtgconten.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgconten_RowEnter);
@@ -102,14 +106,15 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.axAcroPDF1.Enabled = true;
-            this.axAcroPDF1.Location = new System.Drawing.Point(3, 33);
+            this.axAcroPDF1.Location = new System.Drawing.Point(-1, 33);
             this.axAcroPDF1.Name = "axAcroPDF1";
             this.axAcroPDF1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axAcroPDF1.OcxState")));
-            this.axAcroPDF1.Size = new System.Drawing.Size(483, 536);
+            this.axAcroPDF1.Size = new System.Drawing.Size(474, 505);
             this.axAcroPDF1.TabIndex = 3;
             // 
             // splitContainer1
             // 
+            this.splitContainer1.BackColor = System.Drawing.Color.White;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Name = "splitContainer1";
@@ -120,45 +125,53 @@
             this.splitContainer1.Panel1.Controls.Add(this.lbl);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
             this.splitContainer1.Panel1.Controls.Add(this.dtgconten);
+            this.splitContainer1.Panel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.splitContainer1.Panel1MinSize = 500;
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.button1);
             this.splitContainer1.Panel2.Controls.Add(this.axAcroPDF1);
-            this.splitContainer1.Size = new System.Drawing.Size(1079, 572);
-            this.splitContainer1.SplitterDistance = 586;
+            this.splitContainer1.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
+            this.splitContainer1.Panel2MinSize = 450;
+            this.splitContainer1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.splitContainer1.Size = new System.Drawing.Size(984, 541);
+            this.splitContainer1.SplitterDistance = 500;
             this.splitContainer1.TabIndex = 4;
-            // 
-            // lbl
-            // 
-            this.lbl.Location = new System.Drawing.Point(196, 7);
-            this.lbl.Name = "lbl";
-            this.lbl.ReadOnly = true;
-            this.lbl.Size = new System.Drawing.Size(263, 20);
-            this.lbl.TabIndex = 3;
-            this.lbl.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button2.Location = new System.Drawing.Point(465, 7);
+            this.button2.Location = new System.Drawing.Point(382, 7);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(118, 23);
             this.button2.TabIndex = 4;
-            this.button2.Text = "Seleccionar Todo";
+            this.button2.Text = "Copiar Todo";
             this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // lbl
+            // 
+            this.lbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl.Location = new System.Drawing.Point(115, 7);
+            this.lbl.Name = "lbl";
+            this.lbl.ReadOnly = true;
+            this.lbl.Size = new System.Drawing.Size(263, 20);
+            this.lbl.TabIndex = 3;
+            this.lbl.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1079, 572);
+            this.ClientSize = new System.Drawing.Size(984, 541);
             this.Controls.Add(this.splitContainer1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(1000, 580);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Pdf Book";

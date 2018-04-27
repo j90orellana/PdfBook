@@ -38,6 +38,11 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.button2 = new System.Windows.Forms.Button();
             this.lbl = new System.Windows.Forms.TextBox();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.button3 = new System.Windows.Forms.Button();
+            this.txtruta = new System.Windows.Forms.TextBox();
+            this.btnbuscar = new System.Windows.Forms.Button();
+            this.txtfiltro = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dtgconten)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axAcroPDF1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -60,9 +65,9 @@
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button1.Location = new System.Drawing.Point(364, 7);
+            this.button1.Location = new System.Drawing.Point(390, 7);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(109, 23);
+            this.button1.Size = new System.Drawing.Size(82, 23);
             this.button1.TabIndex = 1;
             this.button1.Text = "Cargar Pdf";
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -91,7 +96,7 @@
             this.dtgconten.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dtgconten.RowTemplate.Height = 18;
             this.dtgconten.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dtgconten.Size = new System.Drawing.Size(494, 503);
+            this.dtgconten.Size = new System.Drawing.Size(494, 525);
             this.dtgconten.TabIndex = 2;
             this.dtgconten.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgconten_CellDoubleClick);
             this.dtgconten.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgconten_RowEnter);
@@ -106,10 +111,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.axAcroPDF1.Enabled = true;
-            this.axAcroPDF1.Location = new System.Drawing.Point(-1, 33);
+            this.axAcroPDF1.Location = new System.Drawing.Point(3, 33);
             this.axAcroPDF1.Name = "axAcroPDF1";
             this.axAcroPDF1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axAcroPDF1.OcxState")));
-            this.axAcroPDF1.Size = new System.Drawing.Size(474, 505);
+            this.axAcroPDF1.Size = new System.Drawing.Size(469, 525);
             this.axAcroPDF1.TabIndex = 3;
             // 
             // splitContainer1
@@ -130,13 +135,17 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.txtfiltro);
+            this.splitContainer1.Panel2.Controls.Add(this.btnbuscar);
+            this.splitContainer1.Panel2.Controls.Add(this.txtruta);
+            this.splitContainer1.Panel2.Controls.Add(this.button3);
             this.splitContainer1.Panel2.Controls.Add(this.button1);
             this.splitContainer1.Panel2.Controls.Add(this.axAcroPDF1);
             this.splitContainer1.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
             this.splitContainer1.Panel2MinSize = 450;
             this.splitContainer1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.splitContainer1.Size = new System.Drawing.Size(984, 541);
+            this.splitContainer1.Size = new System.Drawing.Size(984, 561);
             this.splitContainer1.SplitterDistance = 500;
             this.splitContainer1.TabIndex = 4;
             // 
@@ -145,7 +154,7 @@
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button2.Location = new System.Drawing.Point(382, 7);
+            this.button2.Location = new System.Drawing.Point(379, 7);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(118, 23);
             this.button2.TabIndex = 4;
@@ -157,21 +166,70 @@
             // lbl
             // 
             this.lbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbl.Location = new System.Drawing.Point(115, 7);
+            this.lbl.Location = new System.Drawing.Point(110, 8);
             this.lbl.Name = "lbl";
             this.lbl.ReadOnly = true;
             this.lbl.Size = new System.Drawing.Size(263, 20);
             this.lbl.TabIndex = 3;
             this.lbl.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
+            // button3
+            // 
+            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
+            this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button3.Location = new System.Drawing.Point(148, 7);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(109, 23);
+            this.button3.TabIndex = 4;
+            this.button3.Text = "Selecc.Carpeta";
+            this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // txtruta
+            // 
+            this.txtruta.Location = new System.Drawing.Point(3, 8);
+            this.txtruta.Name = "txtruta";
+            this.txtruta.ReadOnly = true;
+            this.txtruta.Size = new System.Drawing.Size(139, 20);
+            this.txtruta.TabIndex = 5;
+            this.txtruta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtruta.TextChanged += new System.EventHandler(this.txtruta_TextChanged);
+            // 
+            // btnbuscar
+            // 
+            this.btnbuscar.Enabled = false;
+            this.btnbuscar.Image = ((System.Drawing.Image)(resources.GetObject("btnbuscar.Image")));
+            this.btnbuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnbuscar.Location = new System.Drawing.Point(260, 7);
+            this.btnbuscar.Name = "btnbuscar";
+            this.btnbuscar.Size = new System.Drawing.Size(65, 23);
+            this.btnbuscar.TabIndex = 6;
+            this.btnbuscar.Text = "Buscar";
+            this.btnbuscar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnbuscar.UseVisualStyleBackColor = true;
+            this.btnbuscar.Click += new System.EventHandler(this.btnbuscar_Click);
+            // 
+            // txtfiltro
+            // 
+            this.txtfiltro.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtfiltro.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.txtfiltro.Location = new System.Drawing.Point(331, 8);
+            this.txtfiltro.Name = "txtfiltro";
+            this.txtfiltro.Size = new System.Drawing.Size(53, 20);
+            this.txtfiltro.TabIndex = 7;
+            this.txtfiltro.Text = "*.pdf";
+            this.txtfiltro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 541);
+            this.ClientSize = new System.Drawing.Size(984, 561);
             this.Controls.Add(this.splitContainer1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(1000, 580);
+            this.MinimumSize = new System.Drawing.Size(1000, 600);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Pdf Book";
@@ -181,6 +239,7 @@
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -197,6 +256,11 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TextBox lbl;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.TextBox txtruta;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnbuscar;
+        private System.Windows.Forms.TextBox txtfiltro;
     }
 }
 

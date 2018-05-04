@@ -34,31 +34,6 @@ namespace Pdfbook
                 Analizarpdf();
             }
         }
-        public void Analizarpdf()
-        {
-            int f = 0;
-            foreach (DataGridViewRow item in dtgconten.Rows)
-            {
-                try
-                {
-                    if (item.Cells["rutaarchivo"].Value != null)
-                    {
-                        string name = item.Cells["rutaarchivo"].Value.ToString();
-
-                        iTextSharp.text.pdf.PdfReader PdfRreader = new iTextSharp.text.pdf.PdfReader(name);
-                        item.Cells["paginas"].Value = PdfRreader.NumberOfPages;
-                        item.Cells["Ruta"].Value = name.Substring(0, name.LastIndexOf('\\'));
-                        item.Cells["archivo"].Value = name.Substring(name.LastIndexOf('\\') + 1);
-                        f += PdfRreader.NumberOfPages;
-                    }
-                }
-                catch (Exception) { }
-            }
-            lbl.Text = $"Nro Registros {dtgconten.Rows.Count} Nro Páginas {f}";
-            dtgconten.Columns["rutaarchivo"].Visible = false;
-
-            dtgconten.Columns["ruta"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-        }
         private void Form1_Load(object sender, EventArgs e)
         {
             tablita = new DataTable();
@@ -125,6 +100,7 @@ namespace Pdfbook
 
         private void btnbuscar_Click(object sender, EventArgs e)
         {
+            if (backgroundWorker1.IsBusy) backgroundWorker1.CancelAsync();
             tablita.Rows.Clear();
 
             foreach (string f in Directory.GetFiles(txtruta.Text, txtfiltro.Text))
@@ -136,9 +112,47 @@ namespace Pdfbook
             dtgconten.DataSource = tablita;
 
             Analizarpdf();
-
             // dtgconten.Columns["rutaarchivo"].Visible = true;
+        }
+        public void Analizarpdf()
+        {
+            if (!backgroundWorker1.IsBusy)
+            {
+                backgroundWorker1.RunWorkerAsync();
+            }
+        }
+        int f = 0;
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            f = 0;
+            foreach (DataGridViewRow item in dtgconten.Rows)
+            {
+                try
+                {
+                    if (item.Cells["rutaarchivo"].Value != null)
+                    {
+                        string name = item.Cells["rutaarchivo"].Value.ToString();
 
+                        iTextSharp.text.pdf.PdfReader PdfReader = new iTextSharp.text.pdf.PdfReader(name);
+                        item.Cells["paginas"].Value = PdfReader.NumberOfPages;
+                        item.Cells["Ruta"].Value = name.Substring(0, name.LastIndexOf('\\'));
+                        item.Cells["archivo"].Value = name.Substring(name.LastIndexOf('\\') + 1);
+                        f += PdfReader.NumberOfPages;
+                    }
+                }
+                catch (Exception) { }
+            }
+        }
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            lbl.Text = $"Nro Registros {dtgconten.Rows.Count} Nro Páginas {f}";
+            dtgconten.Columns["rutaarchivo"].Visible = false;
+            dtgconten.Columns["ruta"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dtgconten.Refresh();
+        }
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            //Text = "PdfBook " + e.ProgressPercentage;            
         }
     }
 }

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.dtgconten = new System.Windows.Forms.DataGridView();
@@ -38,11 +38,12 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.button2 = new System.Windows.Forms.Button();
             this.lbl = new System.Windows.Forms.TextBox();
-            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.button3 = new System.Windows.Forms.Button();
-            this.txtruta = new System.Windows.Forms.TextBox();
-            this.btnbuscar = new System.Windows.Forms.Button();
             this.txtfiltro = new System.Windows.Forms.TextBox();
+            this.btnbuscar = new System.Windows.Forms.Button();
+            this.txtruta = new System.Windows.Forms.TextBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.dtgconten)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axAcroPDF1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -79,8 +80,8 @@
             this.dtgconten.AllowUserToAddRows = false;
             this.dtgconten.AllowUserToDeleteRows = false;
             this.dtgconten.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.dtgconten.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.dtgconten.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dtgconten.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -173,28 +174,17 @@
             this.lbl.TabIndex = 3;
             this.lbl.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // button3
+            // txtfiltro
             // 
-            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
-            this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button3.Location = new System.Drawing.Point(148, 7);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(109, 23);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "Selecc.Carpeta";
-            this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // txtruta
-            // 
-            this.txtruta.Location = new System.Drawing.Point(3, 8);
-            this.txtruta.Name = "txtruta";
-            this.txtruta.ReadOnly = true;
-            this.txtruta.Size = new System.Drawing.Size(139, 20);
-            this.txtruta.TabIndex = 5;
-            this.txtruta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtruta.TextChanged += new System.EventHandler(this.txtruta_TextChanged);
+            this.txtfiltro.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtfiltro.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.txtfiltro.Location = new System.Drawing.Point(331, 8);
+            this.txtfiltro.Name = "txtfiltro";
+            this.txtfiltro.Size = new System.Drawing.Size(53, 20);
+            this.txtfiltro.TabIndex = 7;
+            this.txtfiltro.Text = "*.pdf";
+            this.txtfiltro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // btnbuscar
             // 
@@ -210,17 +200,34 @@
             this.btnbuscar.UseVisualStyleBackColor = true;
             this.btnbuscar.Click += new System.EventHandler(this.btnbuscar_Click);
             // 
-            // txtfiltro
+            // txtruta
             // 
-            this.txtfiltro.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtfiltro.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.txtfiltro.Location = new System.Drawing.Point(331, 8);
-            this.txtfiltro.Name = "txtfiltro";
-            this.txtfiltro.Size = new System.Drawing.Size(53, 20);
-            this.txtfiltro.TabIndex = 7;
-            this.txtfiltro.Text = "*.pdf";
-            this.txtfiltro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtruta.Location = new System.Drawing.Point(3, 8);
+            this.txtruta.Name = "txtruta";
+            this.txtruta.ReadOnly = true;
+            this.txtruta.Size = new System.Drawing.Size(139, 20);
+            this.txtruta.TabIndex = 5;
+            this.txtruta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtruta.TextChanged += new System.EventHandler(this.txtruta_TextChanged);
+            // 
+            // button3
+            // 
+            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
+            this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button3.Location = new System.Drawing.Point(148, 7);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(109, 23);
+            this.button3.TabIndex = 4;
+            this.button3.Text = "Selecc.Carpeta";
+            this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
             // Form1
             // 
@@ -261,6 +268,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button btnbuscar;
         private System.Windows.Forms.TextBox txtfiltro;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 

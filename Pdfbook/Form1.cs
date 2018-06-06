@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
 
 namespace Pdfbook
 {
@@ -34,6 +36,7 @@ namespace Pdfbook
                 Analizarpdf();
             }
         }
+        private int fila = 0;
         private void Form1_Load(object sender, EventArgs e)
         {
             tablita = new DataTable();
@@ -47,6 +50,10 @@ namespace Pdfbook
         {
             MessageBox.Show(Text, g, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+        public void msgs(string g)
+        {
+            MessageBox.Show( g, "Lector PDF", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
         private void dtgconten_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             axAcroPDF1.src = (dtgconten["RutaArchivo", e.RowIndex].Value.ToString());
@@ -54,7 +61,8 @@ namespace Pdfbook
         private void button2_Click(object sender, EventArgs e)
         {
             dtgconten.SelectAll();
-            Clipboard.SetDataObject(dtgconten.GetClipboardContent());
+            if (dtgconten.Rows.Count > 0)
+                Clipboard.SetDataObject(dtgconten.GetClipboardContent());
         }
         private void dtgconten_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -69,7 +77,6 @@ namespace Pdfbook
             {
                 txtruta.Text = folderBrowserDialog1.SelectedPath;
             }
-
         }
         private void txtruta_TextChanged(object sender, EventArgs e)
         {
@@ -153,6 +160,55 @@ namespace Pdfbook
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             //Text = "PdfBook " + e.ProgressPercentage;            
+        }
+
+        private void dtgconten_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.Button == MouseButtons.Right)
+            {
+                contextMenuStrip1.Show(MousePosition);
+            }
+        }
+        private void dividirPdfToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.Filter = "Archivos Pdf|*.pdf";
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                if (saveFileDialog1.FileName != null)
+                {
+                    DataGridViewRow item = new DataGridViewRow();
+                    item = dtgconten.Rows[fila];
+                    string name = item.Cells["rutaarchivo"].Value.ToString();
+                    iTextSharp.text.pdf.PdfReader PdfReader = new iTextSharp.text.pdf.PdfReader(name);
+                    int length = PdfReader.NumberOfPages;
+
+                    for (int i = 0; i < length; i++)
+                    {
+                        LOOP:
+                        if (File.Exists($"{saveFileDialog1.FileName}[{i + 1}].pdf"))
+                        {
+                            msgs("Nombre de Archivo Ya Existe, Ingrese otro");
+                            if (saveFileDialog1.ShowDialog() != DialogResult.OK)
+                            {
+                                return;
+                            }
+                            goto LOOP;
+                        }
+                        string filename = $"{saveFileDialog1.FileName}[{i + 1}].pdf";
+                        Document document = new Document();
+                        PdfCopy copy = new PdfCopy(document, new FileStream(filename, FileMode.Create));
+                        document.Open();
+                        copy.AddPage(copy.GetImportedPage(PdfReader, length));
+                        document.Close();
+                    }
+                    PdfReader.Close();
+                    msgs("Exportado Con Exito");
+                }
+        }
+       
+        private void dtgconten_CurrentCellChanged(object sender, EventArgs e)
+        {
+            if (dtgconten.CurrentRow != null)
+                fila = dtgconten.CurrentRow.Index;
         }
     }
 }
